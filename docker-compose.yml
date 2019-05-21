@@ -1,0 +1,13 @@
+version: '3'
+services:
+  python:
+    build: .
+    environment:
+      - PORT=${PORT}
+      - GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/sa.json
+      - SLACK_API_TOKEN=${SLACK_API_TOKEN}
+    ports:
+      - "80:${PORT}"
+    volumes:
+      - ./app:/app
+      - ./service_account:/tmp/keys:ro

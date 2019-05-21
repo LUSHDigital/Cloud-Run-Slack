@@ -1,0 +1,12 @@
+steps:
+  # build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/cloud-run-slack-bot', '.']
+  # push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/lsd-sales-from-weather-bath']
+  # Deploy container image to Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['beta', 'run', 'deploy', 'cloud-run-slack-bot', '--image', 'gcr.io/$PROJECT_ID/cloud-run-slack-bot', '--region', 'us-central1', '--update-env-vars', 'SLACK_BOT_TOKEN=${_SLACK_BOT_TOKEN},KEY2=${_BAR}']
+images:
+- gcr.io/$PROJECT_ID/cloud-run-slack-bot
