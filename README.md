@@ -1,4 +1,4 @@
-# LSD Sales From Weather Bath
+# Cloud Run Slack
 
 [![Requirements Status](https://requires.io/github/LUSHDigital/Cloud-Run-Slack-Bot/requirements.svg?branch=master)](https://requires.io/github/LUSHDigital/Cloud-Run-Slack-Bot/requirements/?branch=master)
 
