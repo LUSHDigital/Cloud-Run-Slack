@@ -1,6 +1,6 @@
 # Cloud Run Slack
 
-[![Requirements Status](https://requires.io/github/LUSHDigital/Cloud-Run-Slack-Bot/requirements.svg?branch=master)](https://requires.io/github/LUSHDigital/Cloud-Run-Slack-Bot/requirements/?branch=master)
+[![Requirements Status](https://requires.io/github/LUSHDigital/Cloud-Run-Slack/requirements.svg?branch=master)](https://requires.io/github/LUSHDigital/Cloud-Run-Slack/requirements/?branch=master)
 
 Based on [Google Cloud Run Python Template](https://github.com/LUSHDigital/Google-Cloud-Run-Python-Template).
 
