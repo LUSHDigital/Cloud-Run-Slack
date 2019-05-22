@@ -6,6 +6,7 @@ services:
       - PORT=${PORT}
       - GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/sa.json
       - SLACK_API_TOKEN=${SLACK_API_TOKEN}
+      - VERIFICATION_TOKEN=${VERIFICATION_TOKEN}
     ports:
       - "80:${PORT}"
     volumes:

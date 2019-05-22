@@ -36,7 +36,7 @@ def post_to_user_by_id(message: hug.types.text, userId: hug.types.text, hug_time
 
 @hug.post()
 @hug.local()
-def slash():
+def slash(body):
     """Post a message to a Slack User by UserId"""
 
-    return {'text': "hello"}
+    return {'text': body}
