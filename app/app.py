@@ -82,4 +82,4 @@ def slash(from_slack):
             "text": "<@{}> has started a lens model training run.  It's identifier will be *[{}]*".format(from_slack['user_name'], datetime_object.strftime('%Y%m%d_%H%M%S'))
         }
 
-    return {body}
+        return {body}
