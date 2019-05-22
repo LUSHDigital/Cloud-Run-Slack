@@ -2,6 +2,3 @@ hug==2.5.4
 gunicorn==19.9.0
 slackclient>=2.0.0
 certifi
-jsonify
-request
-abort
