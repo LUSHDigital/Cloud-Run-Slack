@@ -15,6 +15,7 @@ SERVICE_ACCOUNT_KEY = base64.b64decode(os.environ['SERVICE_ACCOUNT_KEY'])
 verification_token=os.environ['VERIFICATION_TOKEN']
 IAP_CLIENT_ID = os.environ['IAP_CLIENT_ID']
 IAP_REQUEST_URL = os.environ['IAP_REQUEST_URL']
+_LOCAL_TZ = get_localzone()
 
 @hug.get(examples='message=hello world&channel=cloud-run')
 @hug.local()
