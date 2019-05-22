@@ -3,6 +3,7 @@ import slack
 import hug
 
 client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
+verification_token=os.environ['VERIFICATION_TOKEN']
 
 @hug.get(examples='message=hello world&channel=cloud-run')
 @hug.local()
@@ -38,5 +39,7 @@ def post_to_user_by_id(message: hug.types.text, userId: hug.types.text, hug_time
 @hug.local()
 def slash(body):
     """Post a message to a Slack User by UserId"""
-    str1 = ''.join(body)
-    return {'text': str1}
+    if body['token'] == verification_token:
+        return {'text': "hello"}
+    else:
+        return {'text': "not you"}
