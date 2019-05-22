@@ -7,6 +7,10 @@ services:
       - GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/sa.json
       - SLACK_API_TOKEN=${SLACK_API_TOKEN}
       - VERIFICATION_TOKEN=${VERIFICATION_TOKEN}
+      - SERVICE_ACCOUNT_KEY=${SERVICE_ACCOUNT_KEY}
+      - IAP_CLIENT_ID=${IAP_CLIENT_ID}
+      - IAP_REQUEST_URL=${IAP_REQUEST_URL}
+
     ports:
       - "80:${PORT}"
     volumes:
