@@ -7,7 +7,7 @@ from tzlocal import get_localzone
 from flask import jsonify
 import re
 import base64
-import requests 
+import requests
 
 
 client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
@@ -49,16 +49,16 @@ def post_to_user_by_id(message: hug.types.text, userId: hug.types.text, hug_time
 
 @hug.post()
 @hug.local()
-def slash(body):
+def slash(from_slack):
     """Respond to a Slack command"""
-    if body['token'] == verification_token:
+    if from_slack['token'] == verification_token:
 
         time_now = datetime.now(_LOCAL_TZ)
         time_ident = time_now.strftime('%Y%m%d%H%M%s%Z')
 
         payload = {
             'run_id': 'post-triggered-run-%s' % time_ident,
-            'conf': json.dumps({'started_by' : body['user_name']}),
+            'conf': json.dumps({'started_by' : from_slack['user_name']}),
         }
         try:
             service_account_json = json.loads(SERVICE_ACCOUNT_KEY)
@@ -67,7 +67,7 @@ def slash(body):
             body = {
                 "text": "Sorry, could not start the training run."
             }
-            return jsonify(body)
+            return {body}
 
         parsed_message = json.loads(x)
 
@@ -79,7 +79,7 @@ def slash(body):
 
         body = {
             "response_type": "in_channel",
-            "text": "<@{}> has started a lens model training run.  It's identifier will be *[{}]*".format(request.form.get('user_name'), datetime_object.strftime('%Y%m%d_%H%M%S'))
+            "text": "<@{}> has started a lens model training run.  It's identifier will be *[{}]*".format(from_slack['user_name'], datetime_object.strftime('%Y%m%d_%H%M%S'))
         }
 
     return {body}
