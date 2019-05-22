@@ -7,6 +7,6 @@ steps:
   args: ['push', 'gcr.io/$PROJECT_ID/cloud-run-slack']
   # Deploy container image to Cloud Run
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['beta', 'run', 'deploy', 'cloud-run-slack', '--image', 'gcr.io/$PROJECT_ID/cloud-run-slack', '--region', 'us-central1', '--update-env-vars', 'SLACK_API_TOKEN=${_SLACK_API_TOKEN}']
+  args: ['beta', 'run', 'deploy', 'cloud-run-slack', '--image', 'gcr.io/$PROJECT_ID/cloud-run-slack', '--region', 'us-central1', '--update-env-vars', 'SLACK_API_TOKEN=${_SLACK_API_TOKEN}, VERIFICATION_TOKEN=${_VERIFICATION_TOKEN}']
 images:
 - gcr.io/$PROJECT_ID/cloud-run-slack
