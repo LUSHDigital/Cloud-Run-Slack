@@ -38,8 +38,7 @@ def post_to_user_by_id(message: hug.types.text, userId: hug.types.text, hug_time
 @hug.post()
 @hug.local()
 def slash(body):
-    """Post a message to a Slack User by UserId"""
+    """Respond to a Slack command"""
     if body['token'] == verification_token:
-        return {'text': "hello"}
-    else:
-        return {'text': "not you"}
+        name = body['user_name']
+        return {'text': "Hello {}!".format(name)}
