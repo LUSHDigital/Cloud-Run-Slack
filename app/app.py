@@ -5,9 +5,9 @@ import make_iap_request as iap
 from datetime import datetime
 from tzlocal import get_localzone
 from flask import jsonify
-import make_iap_request as iap
 import re
 import base64
+import requests 
 
 
 client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
