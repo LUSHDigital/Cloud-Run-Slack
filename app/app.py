@@ -52,7 +52,7 @@ def slash(body):
             'run_id': 'post-triggered-run-%s' % time_ident,
             'conf': json.dumps({'started_by' : body['user_name']}),
         }
-       try:
+        try:
             service_account_json = json.loads(SERVICE_ACCOUNT_KEY)
             x = iap.make_iap_request(IAP_REQUEST_URL, IAP_CLIENT_ID, service_account_json, method='POST', data=json.dumps(payload))
         except:
