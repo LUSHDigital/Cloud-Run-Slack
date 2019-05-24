@@ -54,7 +54,7 @@ def slash(from_slack):
     print("starting slash")
     print(from_slack)
     """Respond to a Slack command"""
-    if from_slack['token'] == verification_token:
+    # if from_slack['token'] == verification_token:
 
         # time_now = datetime.now(_LOCAL_TZ)
         # time_ident = time_now.strftime('%Y%m%d%H%M%s%Z')
@@ -85,7 +85,7 @@ def slash(from_slack):
         #     "text": "<@{}> has started a lens model training run.  It's identifier will be *[{}]*".format(from_slack['user_name'], datetime_object.strftime('%Y%m%d_%H%M%S'))
         # }
 
-        return {from_slack}
+    return {from_slack}
 
-    else:
-        print("token not the same")
+    # else:
+    #     print("token not the same")
