@@ -8,7 +8,15 @@ from flask import jsonify
 import re
 import base64
 import requests
+import logging
+import logging.handlers
 
+my_logger = logging.getLogger('MyLogger')
+my_logger.setLevel(logging.DEBUG)
+
+handler = logging.handlers.SysLogHandler(address = '/dev/log')
+
+my_logger.addHandler(handler)
 
 client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
 SERVICE_ACCOUNT_KEY = base64.b64decode(os.environ['SERVICE_ACCOUNT_KEY'])
@@ -50,6 +58,7 @@ def post_to_user_by_id(message: hug.types.text, userId: hug.types.text, hug_time
 @hug.post()
 @hug.local()
 def slash(from_slack):
+    my_logger.debug(from_slack)
     """Respond to a Slack command"""
     if from_slack['token'] == verification_token:
 
