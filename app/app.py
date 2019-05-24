@@ -8,17 +8,24 @@ from flask import jsonify
 import re
 import base64
 import requests
-import logging
-import logging.handlers
+# Imports the Google Cloud client library
+from google.cloud import logging
 
-my_logger = logging.getLogger('MyLogger')
-my_logger.setLevel(logging.DEBUG)
+# Instantiates a client
+logging_client = logging.Client()
 
-handler = logging.handlers.SysLogHandler(address = '/dev/log')
+# The name of the log to write to
+log_name = 'cloud-run'
+# Selects the log to write to
+logger = logging_client.logger(log_name)
 
-my_logger.addHandler(handler)
+# The data to log
+text = 'Hello, world!'
 
-my_logger.debug("logs running")
+# Writes the log entry
+logger.log_text(text)
+
+print('Logged: {}'.format(text))
 
 client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
 SERVICE_ACCOUNT_KEY = base64.b64decode(os.environ['SERVICE_ACCOUNT_KEY'])
@@ -26,8 +33,6 @@ verification_token=os.environ['VERIFICATION_TOKEN']
 IAP_CLIENT_ID = os.environ['IAP_CLIENT_ID']
 IAP_REQUEST_URL = os.environ['IAP_REQUEST_URL']
 _LOCAL_TZ = get_localzone()
-
-my_logger.debug("variables imported")
 
 @hug.get(examples='message=hello world&channel=cloud-run')
 @hug.local()
@@ -62,8 +67,7 @@ def post_to_user_by_id(message: hug.types.text, userId: hug.types.text, hug_time
 @hug.post()
 @hug.local()
 def slash(from_slack):
-    my_logger.debug("slash running")
-    my_logger.debug(from_slack)
+    logger.log_text(from_slack)
     """Respond to a Slack command"""
     if from_slack['token'] == verification_token:
 
