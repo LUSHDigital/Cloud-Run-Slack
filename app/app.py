@@ -8,24 +8,8 @@ from flask import jsonify
 import re
 import base64
 import requests
-# Imports the Google Cloud client library
-from google.cloud import logging
 
-# Instantiates a client
-logging_client = logging.Client()
-
-# The name of the log to write to
-log_name = 'cloud-run'
-# Selects the log to write to
-logger = logging_client.logger(log_name)
-
-# The data to log
-text = 'Hello, world!'
-
-# Writes the log entry
-logger.log_text(text)
-
-print('Logged: {}'.format(text))
+print("running")
 
 client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
 SERVICE_ACCOUNT_KEY = base64.b64decode(os.environ['SERVICE_ACCOUNT_KEY'])
@@ -67,9 +51,11 @@ def post_to_user_by_id(message: hug.types.text, userId: hug.types.text, hug_time
 @hug.post()
 @hug.local()
 def slash(from_slack):
-    logger.log_text(from_slack)
+    print("starting slash")
+    print(from_slack)
     """Respond to a Slack command"""
     if from_slack['token'] == verification_token:
+        print("token the same")
 
         time_now = datetime.now(_LOCAL_TZ)
         time_ident = time_now.strftime('%Y%m%d%H%M%s%Z')
@@ -101,3 +87,6 @@ def slash(from_slack):
         }
 
         return {body}
+
+    else:
+        print("token not the same")

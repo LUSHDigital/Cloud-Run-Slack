@@ -10,4 +10,4 @@ COPY ./app .
 # Install production dependencies.
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:__hug_wsgi__
+CMD exec gunicorn --access-logfile --error-logfile --log-level debug --bind :$PORT --workers 1 --threads 8 app:__hug_wsgi__
