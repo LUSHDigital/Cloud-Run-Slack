@@ -80,8 +80,8 @@ def slash(body):
     #         time_string = re.search("([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2})", parsed_message['message'])
     #         datetime_object = datetime.strptime(time_string.group(), '%Y-%m-%d %H:%M:%S')
 
-        return {
-            'response_type': 'in_channel',
-            'text': '123',
-            'took': float(hug_timer)
-            }
+    return {
+        'response_type': 'in_channel',
+        'text': '123',
+        'took': float(hug_timer)
+        }
