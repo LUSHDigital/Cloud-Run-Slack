@@ -85,7 +85,4 @@ def slash(body):
             "text": "<@{}> has started a lens model training run.  It's identifier will be *[{}]*".format(body['user_name'], datetime_object.strftime('%Y%m%d_%H%M%S'))
         }
 
-    return {response}
-
-    else:
-        print("token not the same")
+        return {response}
