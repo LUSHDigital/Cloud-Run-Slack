@@ -54,31 +54,35 @@ def slash(body):
     print("starting slash")
     print(body)
     """Respond to a Slack command"""
-    # if body['token'] == verification_token:
-    #     print("token ok")
-    #
-    #     time_now = datetime.now(_LOCAL_TZ)
-    #     time_ident = time_now.strftime('%Y%m%d%H%M%s%Z')
-    #
-    #     payload = {
-    #         'run_id': 'post-triggered-run-%s' % time_ident,
-    #         'conf': json.dumps({'started_by' : body['user_name']}),
-    #     }
-    #     try:
-    #         service_account_json = json.loads(SERVICE_ACCOUNT_KEY)
-    #         x = iap.make_iap_request(IAP_REQUEST_URL, IAP_CLIENT_ID, service_account_json, method='POST', data=json.dumps(payload))
-    #     except:
-    #         return {
-    #             "response_type": "in_channel",
-    #             "text": "Sorry, could not start the training run."
-    #         }
-    #
-    #     parsed_message = json.loads(x)
-    #
-    #     if "message" in parsed_message.keys():
-    #         datetime_object = datetime.now(_LOCAL_TZ)
-    #         time_string = re.search("([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2})", parsed_message['message'])
-    #         datetime_object = datetime.strptime(time_string.group(), '%Y-%m-%d %H:%M:%S')
+    if body['token'] == verification_token:
+        print("token ok")
 
-    return {"response_type": "in_channel",
-            "text": "123"}
+        time_now = datetime.now(_LOCAL_TZ)
+        time_ident = time_now.strftime('%Y%m%d%H%M%s%Z')
+
+        payload = {
+            'run_id': 'post-triggered-run-%s' % time_ident,
+            'conf': json.dumps({'started_by' : body['user_name']}),
+        }
+        try:
+            service_account_json = json.loads(SERVICE_ACCOUNT_KEY)
+            x = iap.make_iap_request(IAP_REQUEST_URL, IAP_CLIENT_ID, service_account_json, method='POST', data=json.dumps(payload))
+        except:
+            response = {
+                "response_type": "in_channel",
+                "text": "Sorry, could not start the training run."
+            }
+            print(response)
+            return {response}
+
+        parsed_message = json.loads(x)
+
+        if "message" in parsed_message.keys():
+            print("message in key")
+            print(parsed_message)
+            datetime_object = datetime.now(_LOCAL_TZ)
+            time_string = re.search("([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2})", parsed_message['message'])
+            datetime_object = datetime.strptime(time_string.group(), '%Y-%m-%d %H:%M:%S')
+
+        return {"response_type": "in_channel",
+                "text": "<@{}> has started a lens model training run.  It's identifier will be *[{}]*".format(body['user_name'], datetime_object.strftime('%Y%m%d_%H%M%S'))}
