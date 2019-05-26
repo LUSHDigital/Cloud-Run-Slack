@@ -84,11 +84,8 @@ def slash(body):
             time_string = re.search("([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2})", parsed_message['message'])
             datetime_object = datetime.strptime(time_string.group(), '%Y-%m-%d %H:%M:%S')
 
-        response = {
+        return {
             "response_type": "in_channel",
-            "text": "<@{}> has started a lens model training run.  It's identifier will be *[{}]*".format(body['user_name'], datetime_object.strftime('%Y%m%d_%H%M%S'))
-        }
-
-        print(response)
-
-        return {response}
+            "text": "<@{}> has started a lens model training run.  It's identifier will be *[{}]*".format(body['user_name'], datetime_object.strftime('%Y%m%d_%H%M%S')),
+            'took': float(hug_timer)
+            }
