@@ -50,9 +50,9 @@ def post_to_user_by_id(message: hug.types.text, userId: hug.types.text, hug_time
 
 @hug.post()
 @hug.local()
-def slash(from_slack):
+def slash(body):
     print("starting slash")
-    print(from_slack)
+    print(body)
     """Respond to a Slack command"""
     # if from_slack['token'] == verification_token:
 
@@ -85,7 +85,7 @@ def slash(from_slack):
         #     "text": "<@{}> has started a lens model training run.  It's identifier will be *[{}]*".format(from_slack['user_name'], datetime_object.strftime('%Y%m%d_%H%M%S'))
         # }
 
-    return {from_slack}
+    return {body}
 
     # else:
     #     print("token not the same")
